@@ -4,22 +4,31 @@ session_start();
 
 function recogerValor($key)
 {
-    $valor = "";
-    if (isset($_REQUEST[$key])) {
-        $valor = trim(htmlspecialchars($_REQUEST[$key]));
-    } else {
-        $valor = "error";
+    if (isset($_POST['registrar'])) {
+        $nombre = trim(htmlspecialchars($_POST['nombre']));
+        $correo = trim(htmlspecialchars($_POST['correo']));
+        $contraseña = trim(htmlspecialchars($_POST['contraseña']));
+        $direccion_envio = trim(htmlspecialchars($_POST['direccion_envio']));
+
+        registrarUsuario($nombre, $correo, $contraseña, $direccion_envio);
     }
-    return $valor;
 }
 
 function conectarDB()
 {
+    /*
     $host = "bjssmrmaigacpgmt17yc-mysql.services.clever-cloud.com";
     $database = "bjssmrmaigacpgmt17yc";
     $user = "umchoavprplzg52n";
     $pass = "Ot1xIiJMG0qFmMdfQoBX";
+    */
+    $host = "localhost";
+    $database = "switchsbd";
+    $user = "root";
+    $pass = "";
 
+
+    /*
     try {
         $con = new pdo(
             "mysql:host=$host;dbname=$database",
@@ -30,8 +39,21 @@ function conectarDB()
     } catch (PDOException $e) {
         print "ERROR excepcion pdo";
     }
+    */
+    try {
+        $con = new PDO(
+            "mysql:host=$host;dbname=$database;charset=utf8",
+            $user,
+            $pass
+        );
+        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $con;
+    } catch (PDOException $e) {
+        die("Error al conectar con la base de datos: " . $e->getMessage());
+    }
 }
 
+/*
 function guardarDatos($user, $pass)
 {
     $pdo = conectarDB();
@@ -51,6 +73,25 @@ function guardarDatos($user, $pass)
                 }
             }
         }
+    }
+}^
+*/
+function registrarUsuario($nombre, $correo, $contraseña, $direccion_envio)
+{
+    $consulta = "INSERT INTO usuario (nombre, correo, contraseña, direccion_envio, fecha_registro) 
+                 VALUES (:nombre, :correo, :contraseña, :direccion_envio, CURDATE())";
+    $pdo = conectarDB();
+    try {
+        $resul = $pdo->prepare($consulta);
+        $resul->execute([
+            "nombre" => $nombre,
+            "correo" => $correo,
+            "contraseña" => password_hash($contraseña, PASSWORD_BCRYPT),
+            "direccion_envio" => $direccion_envio
+        ]);
+        echo "<div id='message' class='message'>Usuario registrado correctamente</div>";
+    } catch (PDOException $e) {
+        echo "<div id='message' class='message'>ERROR al registrar usuario: " . $e->getMessage() . "</div>";
     }
 }
 ?>
@@ -83,7 +124,7 @@ function guardarDatos($user, $pass)
 
         .message.error {
             background-color: #f8d7da;
-            color:rgb(212, 12, 32);
+            color: rgb(212, 12, 32);
             border: 1px solid #f5c6cb;
         }
     </style>
@@ -131,11 +172,20 @@ function guardarDatos($user, $pass)
         <div class="contenedor">
             <div class="box-info">
                 <h1>Registrarse</h1><br>
+                <form method="POST" action="index.php">
+                    <h2>Registro</h2>
+                    <input type="text" name="nombre" placeholder="Nombre" required>
+                    <input type="email" name="correo" placeholder="Correo" required>
+                    <input type="password" name="contraseña" placeholder="Contraseña" required>
+                    <textarea name="direccion_envio" placeholder="Dirección de envío" required></textarea>
+                    <button type="submit" name="registrar">Registrar</button>
+                </form>
                 <?php
                 $user = recogerValor("user");
                 $pass = recogerValor("pass");
+
                 if ($user != "" && $pass != "") {
-                    guardarDatos($user, $pass);
+                    registrarUsuario($nombre, $correo, $contraseña, $direccion_envio);
                 } else {
                     echo "<div id='message' class='message error'>¡ERROR!, campos vacios</div>";
                 }

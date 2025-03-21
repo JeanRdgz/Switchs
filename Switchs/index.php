@@ -36,11 +36,19 @@ function recogerValor($key)
 
 function conectarDB()
 {
+    /*
     $host = "bjssmrmaigacpgmt17yc-mysql.services.clever-cloud.com";
     $database = "bjssmrmaigacpgmt17yc";
     $user = "umchoavprplzg52n";
     $pass = "Ot1xIiJMG0qFmMdfQoBX";
+    */
+    $host = "localhost";
+    $database = "switchsbd";
+    $user = "root";
+    $pass = "";
 
+
+    /*
     try {
         $con = new pdo(
             "mysql:host=$host;dbname=$database",
@@ -51,19 +59,31 @@ function conectarDB()
     } catch (PDOException $e) {
         print "ERROR excepcion pdo";
     }
+    */
+    try {
+        $con = new PDO(
+            "mysql:host=$host;dbname=$database;charset=utf8",
+            $user,
+            $pass
+        );
+        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $con;
+    } catch (PDOException $e) {
+        die("Error al conectar con la base de datos: " . $e->getMessage());
+    }
 }
 
-function consultaPass($user, $pass)
+function consultaPass($correo, $contraseña)
 {
-    $consulta = "SELECT * FROM base WHERE user=:param";
+    $consulta = "SELECT * FROM usuario WHERE correo = :correo";
     $pdo = conectarDB();
     $resul = $pdo->prepare($consulta);
     if ($resul != null) {
-        $resul->execute(["param" => $user]);
+        $resul->execute(["correo" => $correo]);
         $registro = $resul->fetch();
 
         if ($registro == null) {
-            echo "<div id='message' class='message'>ERROR usuario no encontrado</div>";
+            echo "<div id='message' class='message'>ERROR: Usuario no encontrado</div>";
             echo "<script>
                     setTimeout(function() {
                         document.getElementById('message').style.display = 'none';
@@ -72,9 +92,9 @@ function consultaPass($user, $pass)
             unset($_SESSION['user']);
             return false;
         }
-        if ($pass == $registro["pass"]) {
-            $_SESSION['user'] = $user;
-            echo "<div id='message' class='message'>usuario y contraseña correcto</div>";
+        if (password_verify($contraseña, $registro["contraseña"])) {
+            $_SESSION['user'] = $registro["nombre"];
+            echo "<div id='message' class='message'>Usuario y contraseña correctos</div>";
             echo "<script>
                     setTimeout(function() {
                         document.getElementById('message').style.display = 'none';
@@ -82,7 +102,7 @@ function consultaPass($user, $pass)
                   </script>";
             return true;
         } else {
-            echo "<div id='message' class='message'>ERROR contraseña incorrecta</div>";
+            echo "<div id='message' class='message'>ERROR: Contraseña incorrecta</div>";
             echo "<script>
                     setTimeout(function() {
                         document.getElementById('message').style.display = 'none';
