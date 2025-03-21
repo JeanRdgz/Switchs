@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "nombre": "Teclado Mecanico",
+        "precio": 50
+    },
+    {
+        "id": 2,
+        "nombre": "Switches Rojos",
+        "precio": 20
+    },
+    {
+        "id": 3,
+        "nombre": "Keycaps PBT",
+        "precio": 30
+    }
+]
