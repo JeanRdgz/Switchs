@@ -3,8 +3,8 @@ session_start();
 
 $host = "localhost";
 $dbname = "switchsbd";
-$user = "root"; // Usuario por defecto en XAMPP
-$password = ""; // Sin contraseña por defecto en XAMPP
+$user = "root";
+$password = "";
 
 try {
     // Conectar a la base de datos con PDO
@@ -27,9 +27,12 @@ if (isset($_POST["login"])) {
 
     if ($user && password_verify($password, $user["contraseña"])) {
         $_SESSION["usuario"] = $user["nombre"];
-        echo "Inicio de sesión exitoso. ¡Bienvenido " . $_SESSION["usuario"] . "!";
+        header("Location: index.php");
+        exit();
     } else {
-        echo "Correo o contraseña incorrectos.";
+        $_SESSION["error_message"] = "Correo o contraseña incorrectos.";
+        header("Location: usuario.php");
+        exit();
     }
 }
 
@@ -39,6 +42,19 @@ if (isset($_POST["register"])) {
     $correo = $_POST["correo"];
     $direccion = $_POST["direccion"];
     $password = password_hash($_POST["contraseña"], PASSWORD_DEFAULT);
+
+    // Verificar si el correo ya existe
+    $checkEmailSql = "SELECT COUNT(*) FROM Usuario WHERE correo = :correo";
+    $checkStmt = $pdo->prepare($checkEmailSql);
+    $checkStmt->bindParam(":correo", $correo, PDO::PARAM_STR);
+    $checkStmt->execute();
+    $emailExists = $checkStmt->fetchColumn();
+
+    if ($emailExists) {
+        $_SESSION["error_message"] = "Usuario ya existente. Por favor, use otro correo.";
+        header("Location: registrarse.php");
+        exit();
+    }
 
     $sql = "INSERT INTO Usuario (nombre, correo, dirección_envío, contraseña, fecha_registro) 
             VALUES (:nombre, :correo, :direccion, :password, NOW())";
@@ -50,8 +66,12 @@ if (isset($_POST["register"])) {
     $stmt->bindParam(":password", $password, PDO::PARAM_STR);
 
     if ($stmt->execute()) {
-        echo "Usuario registrado correctamente.";
+        $_SESSION["usuario"] = $nombre;
+        header("Location: index.php");
+        exit();
     } else {
-        echo "Error en el registro.";
+        $_SESSION["error_message"] = "Error en el registro. Por favor, intente nuevamente.";
+        header("Location: registrarse.php");
+        exit();
     }
 }

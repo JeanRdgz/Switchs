@@ -1,8 +1,8 @@
 <?php
-session_name("login");
 session_start();
+$error_message = isset($_SESSION["error_message"]) ? $_SESSION["error_message"] : "";
+unset($_SESSION["error_message"]);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,19 +12,16 @@ session_start();
     <title>Switch's Keyboards</title>
     <style>
         @import url(usuario.css);
+        .error-message {
+            color: white;
+            font-size: 14px;
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            text-align: center;
+        }
     </style>
     <script src="https://kit.fontawesome.com/637af3b88f.js" crossorigin="anonymous"></script>
-    <script>
-        function ingresar() {
-            form.action = "index.php";
-            form.submit();
-        }
-
-        function registrarse() {
-            form.action = "registrarse.php";
-            form.submit();
-        }
-    </script>
 </head>
 
 <body>
@@ -53,7 +50,9 @@ session_start();
                     <li><a href="keycaps.php">Keycaps</a></li>
                     <li><a href="switches.php">Switches</a></li>
                     <li><a href="personalizar.php">Personalizar</a></li>
-                    <li><a href="#">Usuario</a></li>
+                    <?php if (!isset($_SESSION['usuario'])): ?>
+                        <li><a href="usuario.php">Usuario</a></li>
+                    <?php endif; ?>
                 </ul>
                 <form class="search">
                     <input type="search" placeholder="Buscar...">
@@ -68,25 +67,33 @@ session_start();
     <section class="banner">
         <div class="contenedor">
             <div class="box-info">
-                <h1>Ingresa tu Usuario</h1>
+                <h1>¿Listo para seguir explorando?</h1>
                 <div class="data">
                     <p><i class="fa-solid fa-phone"></i>123-456-7890</p>
                     <p><i class="fa-solid fa-envelope"></i>switchs@gmail.com</p>
                     <p><i class="fa-solid fa-location-dot"></i>Uria Nº17, Oviedo</p>
                 </div>
             </div>
-            <form method="get" name="form">
-                <div class="input-box">
-                    <input type="text" id="user" name="user" required placeholder="ID del usuario">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" id="pass" name="pass" required placeholder="Contraseña">
-                    <i class="fa-solid fa-envelope"></i>
-                </div>
-                <button type="submit" onclick="ingresar()">Ingresar</button>
-                <button type="submit" onclick="registrarse()">Registrarse</button>
-            </form>
+            <div>
+                <?php if (!empty($error_message)): ?>
+                    <div class="error-message"><?php echo $error_message; ?></div>
+                <?php endif; ?>
+                <form method="POST" action="login.php" name="form-ingresar">
+                    <div class="input-box">
+                        <input type="email" name="correo" required placeholder="Correo">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" name="contraseña" required placeholder="Contraseña">
+                        <i class="fa-solid fa-key"></i>
+                    </div>
+                    <button type="submit" name="login">Iniciar Sesión</button>
+                </form>
+                <br>
+                <form method="get" action="registrarse.php" name="form-registrarse">
+                    <button type="submit">Registrarse</button>
+                </form>
+            </div>
         </div>
     </section>
 

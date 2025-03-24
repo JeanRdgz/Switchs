@@ -1,6 +1,12 @@
 <?php
-session_name("login");
 session_start();
+
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: personalizar.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,10 +32,17 @@ session_start();
                     </a>
                 </div>
                 <div class="customer">
-                    <i class="fa-solid fa-headset"></i>
-                    <div class="contact">
-                        <span>Soporte al cliente</span>
-                        <span>123-456-7890</span>
+                    <i class="fa-solid fa-user" style="font-size: 30px;"></i>
+                    <?php if (isset($_SESSION['usuario'])): ?>
+                        <a href="cart.php" style="margin-left: 5px; color: white; text-decoration: none;">
+                            <i class="fa-solid fa-cart-shopping" style="font-size: 30px;"></i>
+                        </a>
+                    <?php endif; ?>
+                    <div class="user">
+                        <span><?php echo isset($_SESSION['usuario']) ? "¡Bienvenido, " . htmlspecialchars($_SESSION['usuario']) . "!" : "¡Bienvenido!"; ?></span>
+                        <?php if (isset($_SESSION['usuario'])): ?>
+                            <a href="?logout=true" style="margin-left: 20px; background: transparent; border: 1px solid white; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Cerrar sesión</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -42,7 +55,9 @@ session_start();
                     <li><a href="keycaps.php">Keycaps</a></li>
                     <li><a href="switches.php">Switches</a></li>
                     <li><a href="personalizar.php">Personalizar</a></li>
-                    <li><a href="usuario.php">Usuario</a></li>
+                    <?php if (!isset($_SESSION['usuario'])): ?>
+                        <li><a href="usuario.php">Usuario</a></li>
+                    <?php endif; ?>
                 </ul>
                 <form class="search">
                     <input type="search" placeholder="Buscar...">

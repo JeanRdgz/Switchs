@@ -1,127 +1,18 @@
 <?php
-session_name("login");
 session_start();
 
-if (!isset($_SESSION['initialized'])) {
+if (isset($_GET['logout'])) {
     session_unset();
-    $_SESSION['initialized'] = true;
+    session_destroy();
+    header("Location: index.php");
+    exit();
 }
 
-$valorUser = "";
-if (isset($_REQUEST["user"])) {
-    $valorUser = trim(htmlspecialchars($_REQUEST["user"]));
-    $_SESSION["user"] = $valorUser;
+if (!isset($_SESSION['usuario'])) {
+    $mensajeBienvenida = "¡Bienvenido!";
 } else {
-    $_SESSION["error"] = "No se ha introducido usuario";
+    $mensajeBienvenida = "¡Bienvenido, " . htmlspecialchars($_SESSION['usuario']) . "!";
 }
-
-$valorPass = "";
-if (isset($_REQUEST["pass"])) {
-    $valorPass = trim(htmlspecialchars($_REQUEST["pass"]));
-    $_SESSION["pass"] = $valorPass;
-} else {
-    $_SESSION["error"] = "No se ha introducido password";
-}
-
-function recogerValor($key)
-{
-    $valor = "";
-    if (isset($_REQUEST[$key])) {
-        $valor = trim(htmlspecialchars($_REQUEST[$key]));
-    } else {
-        $valor = "error";
-    }
-    return $valor;
-}
-
-function conectarDB()
-{
-    /*
-    $host = "bjssmrmaigacpgmt17yc-mysql.services.clever-cloud.com";
-    $database = "bjssmrmaigacpgmt17yc";
-    $user = "umchoavprplzg52n";
-    $pass = "Ot1xIiJMG0qFmMdfQoBX";
-    */
-    $host = "localhost";
-    $database = "switchsbd";
-    $user = "root";
-    $pass = "";
-
-
-    /*
-    try {
-        $con = new pdo(
-            "mysql:host=$host;dbname=$database",
-            $user,
-            $pass
-        );
-        return $con;
-    } catch (PDOException $e) {
-        print "ERROR excepcion pdo";
-    }
-    */
-    try {
-        $con = new PDO(
-            "mysql:host=$host;dbname=$database;charset=utf8",
-            $user,
-            $pass
-        );
-        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        return $con;
-    } catch (PDOException $e) {
-        die("Error al conectar con la base de datos: " . $e->getMessage());
-    }
-}
-
-function consultaPass($correo, $contraseña)
-{
-    $consulta = "SELECT * FROM usuario WHERE correo = :correo";
-    $pdo = conectarDB();
-    $resul = $pdo->prepare($consulta);
-    if ($resul != null) {
-        $resul->execute(["correo" => $correo]);
-        $registro = $resul->fetch();
-
-        if ($registro == null) {
-            echo "<div id='message' class='message'>ERROR: Usuario no encontrado</div>";
-            echo "<script>
-                    setTimeout(function() {
-                        document.getElementById('message').style.display = 'none';
-                    }, 1500);
-                  </script>";
-            unset($_SESSION['user']);
-            return false;
-        }
-        if (password_verify($contraseña, $registro["contraseña"])) {
-            $_SESSION['user'] = $registro["nombre"];
-            echo "<div id='message' class='message'>Usuario y contraseña correctos</div>";
-            echo "<script>
-                    setTimeout(function() {
-                        document.getElementById('message').style.display = 'none';
-                    }, 1500);
-                  </script>";
-            return true;
-        } else {
-            echo "<div id='message' class='message'>ERROR: Contraseña incorrecta</div>";
-            echo "<script>
-                    setTimeout(function() {
-                        document.getElementById('message').style.display = 'none';
-                    }, 1500);
-                  </script>";
-            unset($_SESSION['user']);
-            return false;
-        }
-    } else {
-        echo "<div id='message' class='message'>ERROR al preparar la consulta</div>";
-        echo "<script>
-                setTimeout(function() {
-                    document.getElementById('message').style.display = 'none';
-                }, 1500);
-              </script>";
-        unset($_SESSION['user']);
-    }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -151,12 +42,6 @@ function consultaPass($correo, $contraseña)
 </head>
 
 <body>
-    <?php
-    $pdo = conectarDB();
-    $user = recogerValor("user");
-    $pass = recogerValor("pass");
-    consultaPass($user, $pass);
-    ?>
     <header>
         <div class="container-hero">
             <div class="container hero">
@@ -166,12 +51,15 @@ function consultaPass($correo, $contraseña)
                     </a>
                 </div>
                 <div class="customer">
-                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-user" style="font-size: 30px;"></i>
+                    <a href="cart.php" style="margin-left: 5px; color: white; text-decoration: none;">
+                        <i class="fa-solid fa-cart-shopping" style="font-size: 30px;"></i>
+                    </a>
                     <div class="user">
-                        <?php if (isset($_SESSION['user'])): ?>
-                            <span><?php echo htmlspecialchars($_SESSION['user']); ?></span>
+                        <span><?php echo $mensajeBienvenida; ?></span>
+                        <?php if (isset($_SESSION['usuario'])): ?>
+                            <a href="?logout=true" style="margin-left:20px; background: transparent; border: 1px solid white; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Cerrar sesión</a>
                         <?php endif; ?>
-                        <span>Saludos ;)</span>
                     </div>
                 </div>
             </div>
@@ -184,7 +72,9 @@ function consultaPass($correo, $contraseña)
                     <li><a href="keycaps.php">Keycaps</a></li>
                     <li><a href="switches.php">Switches</a></li>
                     <li><a href="personalizar.php">Personalizar</a></li>
-                    <li><a href="usuario.php">Usuario</a></li>
+                    <?php if (!isset($_SESSION['usuario'])): ?>
+                        <li><a href="usuario.php">Usuario</a></li>
+                    <?php endif; ?>
                 </ul>
                 <form class="search">
                     <input type="search" placeholder="Buscar...">
