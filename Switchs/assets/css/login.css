@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+    --primary: #6a0dad;
+    --background: #000000;
+    --text: #ffffff;
+    --hover: #a54ff3;
+    --background-transparent: #00000069;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text);
+}
+
+.bannerLogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../images/usuario.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 80vh;
+}
+
+.contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    background-color: var(--background-transparent);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 1000px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.box-info,
+.box-form {
+    flex: 1 1 300px;
+    min-width: 280px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.data i{
+    font-size: 20px;
+    color: var(--primary);
+    padding-right: 12px;
+}
+
+/* Input box y botones */
+.input-box {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #47474788;
+    color: var(--text);
+    box-sizing: border-box;
+}
+
+.input-box i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary);
+    pointer-events: none;
+}
+
+button {
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    padding: 8px;
+    background-color: var(--primary);
+    color: var(--text);
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--hover);
+}
