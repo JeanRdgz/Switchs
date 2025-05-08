@@ -4,7 +4,13 @@
     --primary: #6a0dad;
     --background: #000000;
     --text: #ffffff;
-    --hover: #a54ff3;
+    --hover: #3a0a61;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text);
 }
 
 .main-header {
@@ -65,13 +71,62 @@
 }
 
 .nav-menu li a:hover {
-    color: var(--hover);
+    color: var(--primary);
+}
+
+.user-icon:hover i {
+    color: var(--primary);
+    transition: color 0.3s ease;
+}
+
+.logout-button {
+    background-color: var(--primary); 
+    color: var(--text); 
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.logout-button:hover {
+    background-color: var(--hover);
+    transform: scale(1.05);
+}
+
+.welcome-message {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 5px;
+}
+
+.welcome-message i {
+    font-size: 20px;
+    padding-right:10px;
 }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
     .menu-toggle {
         display: inline;
+    }
+
+    .header-top {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .logo {
+        text-align: center;
+    }
+
+    .header-icons {
+        justify-content: space-around;
+        width: 100%;
     }
 
     .nav {

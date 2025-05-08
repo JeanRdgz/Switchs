@@ -4,7 +4,7 @@
     --primary: #6a0dad;
     --background: #000000;
     --text: #ffffff;
-    --hover: #a54ff3;
+    --hover: #3a0a61;
 }
 
 body {
@@ -14,10 +14,10 @@ body {
 }
 
 .footer {
-    background-color: var(--background);
     color: var(--text);
     padding: 40px 20px 20px;
     text-align: center;
+    background-color: var(--background);
 }
 
 .footer-container {
@@ -25,7 +25,6 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     gap: 40px;
-    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -61,7 +60,7 @@ body {
 }
 
 .footer-box ul li a:hover {
-    color: var(--hover);
+    color: var(--primary);
 }
 
 .redsocial {
@@ -82,7 +81,7 @@ body {
 }
 
 .redsocial a:hover {
-    color: var(--hover);
+    color: var(--primary);
 }
 
 .footer-logo {

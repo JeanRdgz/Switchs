@@ -4,10 +4,9 @@
     --primary: #6a0dad;
     --background: #000000;
     --text: #ffffff;
-    --hover: #a54ff3;
+    --hover: #3a0a61;
     --background-transparent: #00000069;
 }
-
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
@@ -42,7 +41,7 @@ body {
 .box-info,
 .box-form {
     flex: 1 1 300px;
-    min-width: 280px;
+    min-width: 320px;
     max-width: 100%;
     display: flex;
     flex-direction: column;
@@ -92,6 +91,9 @@ button {
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+.loginButton{
+    margin-bottom: 15px;
 }
 
 button:hover {

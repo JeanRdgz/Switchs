@@ -1,5 +1,5 @@
 <?php
-// En una página como index.php
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">

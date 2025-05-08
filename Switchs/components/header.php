@@ -7,7 +7,16 @@
             </a>
         </div>
         <div class="header-icons">
-            <a href="#"><i class="fa-solid fa-user"></i></a>
+            <?php if (isset($_SESSION["usuario"]) && !empty($_SESSION["usuario"])): ?>
+                <span class="welcome-message">
+                    <i class="fa-solid fa-user"></i> ¡Hola, <?php echo htmlspecialchars($_SESSION["usuario"]); ?>!
+                </span>
+                <form method="POST" action="../controllers/logoutController.php" style="display:inline;">
+                    <button type="submit" class="logout-button">Cerrar sesión</button>
+                </form>
+            <?php else: ?>
+                <a href="../pages/login.php" class="user-icon"><i class="fa-solid fa-user"></i></a>
+            <?php endif; ?>
             <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
             <button class="menu-toggle" id="menu-toggle">
                 <i class="fa-solid fa-bars"></i>
@@ -16,12 +25,12 @@
     </div>
     <nav class="nav" id="nav">
         <ul class="nav-menu">
-            <li><a href="#">Inicio</a></li>
+            <li><a href="../pages/index.php">Inicio</a></li>
             <li><a href="#">Teclados</a></li>
             <li><a href="#">Switches</a></li>
             <li><a href="#">Keycaps</a></li>
             <li><a href="#">Accesorios</a></li>
-            <li><a href="#">Contacto</a></li>
+            <li><a href="../pages/contact.php">Contacto</a></li>
         </ul>
     </nav>
 </header>
