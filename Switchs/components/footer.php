@@ -4,16 +4,16 @@
         <div class="footer-box">
             <figure>
                 <a href="#">
-                    <img src="../assets/images/logo-switch's-horizontal.png" alt="Logo Switch-e" class="footer-logo">
+                    <img src="../assets/images/logo.png" alt="Logo Switch-e" class="footer-logo">
                 </a>
             </figure>
         </div>
         <div class="footer-box">
             <h2>Categorías</h2>
             <ul>
-                <li><a href="keyboards.php">Keyboards</a></li>
-                <li><a href="keycaps.php">Keycaps</a></li>
-                <li><a href="switches.php">Switches</a></li>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Personalizar</a></li>
                 <li><a href="contact.php">Contacto</a></li>
             </ul>
         </div>

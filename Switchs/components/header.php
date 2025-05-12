@@ -3,7 +3,7 @@
     <div class="header-top">
         <div class="logo">
             <a href="index.php">
-                <img src="../assets/images/logo-switch's-horizontal.png" alt="Logo">
+                <img src="../assets/images/logo.png" alt="Logo">
             </a>
         </div>
         <div class="header-icons">
@@ -26,10 +26,8 @@
     <nav class="nav" id="nav">
         <ul class="nav-menu">
             <li><a href="../pages/index.php">Inicio</a></li>
-            <li><a href="#">Teclados</a></li>
-            <li><a href="#">Switches</a></li>
-            <li><a href="#">Keycaps</a></li>
-            <li><a href="#">Accesorios</a></li>
+            <li><a href="#">Productos</a></li>
+            <li><a href="#">Personalizar</a></li>
             <li><a href="../pages/contact.php">Contacto</a></li>
         </ul>
     </nav>
