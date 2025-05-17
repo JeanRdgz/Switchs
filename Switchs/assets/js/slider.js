@@ -3,7 +3,12 @@ let currentIndex = 0;
 
 function showSlide(index) {
     slides.forEach((slide, i) => {
-        slide.style.display = i === index ? 'block' : 'none';
+
+        if (i === index) {
+            slide.classList.add('active');
+        } else {
+            slide.classList.remove('active');
+        }
     });
 }
 
@@ -12,7 +17,6 @@ function nextSlide() {
     showSlide(currentIndex);
 }
 
-// Mostrar el primer slide al cargar la página
 showSlide(currentIndex);
 
 setInterval(nextSlide, 5000);
