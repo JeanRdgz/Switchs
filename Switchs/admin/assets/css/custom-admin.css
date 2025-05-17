@@ -38,7 +38,6 @@
     border-top: 1px solid var(--primary);
 }
 
-/* Invertir colores para el contenido principal */
 .content-wrapper,
 .container-fluid,
 #content {
@@ -123,12 +122,10 @@
     border: none;
 }
 
-/* Espaciado inferior para los botones */
 .container-fluid .btn {
     margin-bottom: 0.5rem !important;
 }
 
-/* Inputs de formularios en usuarios y productos */
 .form-group input.form-control,
 .form-group textarea.form-control,
 .form-group input[type="number"].form-control,

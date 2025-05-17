@@ -1,11 +1,7 @@
 <?php
 session_start();
-// Simulando que el usuario es admin
-// En tu caso, verifica $_SESSION['admin'] u otra variable real
 if (!isset($_SESSION['admin'])) {
-    $_SESSION['admin'] = true; // Elimina esto cuando uses login real
-    // header("Location: ../login.php");
-    // exit;
+    $_SESSION['admin'] = true;
 }
 
 include 'templates/header.php';

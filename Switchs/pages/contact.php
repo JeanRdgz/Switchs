@@ -7,29 +7,59 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Switch's - Contacto</title>
+    <title>Switch's - Contáctanos</title>
     <link rel="stylesheet" href="../assets/css/contact.css">
     <script src="https://kit.fontawesome.com/637af3b88f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <?php include '../components/header.php'; ?>
-    <main class="contact-container">
-        <div class="contact-banner"></div>
-        <div class="contact-content">
-            <div class="contact-info">
-                <h1>Contáctanos</h1>
-                <p><i class="fa-solid fa-phone"></i> Teléfono: 123-456-7890</p>
-                <p><i class="fa-solid fa-envelope"></i> Email: switchs@gmail.com</p>
-                <p><i class="fa-solid fa-location-dot"></i> Dirección: Uria Nº17, Oviedo</p>
-            </div>
-            <div class="map-container">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.912116774065!2d-5.849388684524537!3d43.36191497913286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd368d8c1f0b1f3b%3A0x403f9f681f3e7e0!2sUria%2C%2017%2C%2033003%20Oviedo%2C%20Asturias%2C%20España!5e0!3m2!1ses!2ses!4v1697040000000!5m2!1ses!2ses" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+    <main class="contact-bg">
+        <div style="width:100%;max-width:1200px;margin:0 auto;padding:40px 10px;">
+            <div class="contact-support-title">Contáctanos</div>
+            <div class="contact-main-row">
+                <div style="flex:1;min-width:260px;">
+                    <div class="contact-support-section">
+                        <strong>¿Necesitas ayuda?</strong>
+                        <div class="data">
+                            <p><i class="fa-solid fa-clock"></i><b>Horario de atención :</b></p>
+                        </div>
+                        Lunes a Sábado: 9:00 - 22:00<br>
+                        Domingos: 10:00 - 18:00
+                        <br><br>
+                        <span>¿Tienes dudas sobre tu pedido, pago o envío? Consulta aquí:</span>
+                        <ul>
+                            <li><a href="#">¿Dónde está mi pedido?</a></li>
+                            <li><a href="#">¿Cómo puedo devolver un producto?</a></li>
+                            <li><a href="#">¿Cuáles son los métodos de pago?</a></li>
+                            <li><a href="#">¿Cuánto tarda el envío?</a></li>
+                            <li><a href="#">Ver todas las preguntas frecuentes</a></li>
+                        </ul>
+                        <div class="data">
+                            <p><i class="fa-solid fa-phone"></i>123-456-7890</p>
+                            <p><i class="fa-solid fa-envelope"></i>switchs@gmail.com</p>
+                            <p><i class="fa-solid fa-location-dot"></i>Uria Nº17, Oviedo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-box">
+                    <form>
+                        <div style="display:flex;gap:1rem;">
+                            <input type="text" name="nombre" required placeholder="Nombre">
+                            <input type="email" name="correo" required placeholder="Correo electrónico">
+                        </div>
+                        <select name="tipo_soporte" required>
+                            <option value="">Tipo de consulta</option>
+                            <option value="pedido">Pedido</option>
+                            <option value="producto">Producto</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                        <input type="text" name="id_pedido" placeholder="ID de pedido (opcional)">
+                        <input type="text" name="producto" placeholder="Nombre/Tipo de producto (opcional)">
+                        <textarea name="mensaje" required placeholder="Mensaje"></textarea>
+                        <button type="submit">Enviar mensaje</button>
+                    </form>
+                </div>
             </div>
         </div>
     </main>
