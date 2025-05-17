@@ -15,7 +15,7 @@ if (!$id) {
 
 // Obtener datos del producto
 try {
-    $stmt = $pdo->prepare("SELECT * FROM producto WHERE id = :id");
+    $stmt = $pdo->prepare("SELECT * FROM producto WHERE id_producto = :id");
     $stmt->execute([':id' => $id]);
     $producto = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         stock = :stock, 
                         imagen_url = :imagen_url, 
                         id_categoria = :id_categoria
-                    WHERE id = :id";
+                    WHERE id_producto = :id";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
                 ':nombre' => $nombre,

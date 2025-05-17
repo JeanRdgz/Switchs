@@ -22,6 +22,13 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
+    <!-- Item: Categoría -->
+    <li class="nav-item">
+        <a class="nav-link" href="/Switchs/Switchs/admin/categoria/listar.php">
+            <i class="fas fa-fw fa-tags"></i>
+            <span>Categoría</span></a>
+    </li>
+
     <!-- Item: Productos -->
     <li class="nav-item">
         <a class="nav-link" href="/Switchs/Switchs/admin/productos/listar.php">
@@ -33,6 +40,13 @@
         <a class="nav-link" href="/Switchs/Switchs/admin/usuarios/listar.php">
             <i class="fas fa-fw fa-users"></i>
             <span>Usuarios</span></a>
+    </li>
+
+    <!-- Item: Pedidos -->
+    <li class="nav-item">
+        <a class="nav-link" href="/Switchs/Switchs/admin/pedidos/listar.php">
+            <i class="fas fa-fw fa-shopping-cart"></i>
+            <span>Pedidos</span></a>
     </li>
 
 </ul>

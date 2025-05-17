@@ -10,6 +10,11 @@ try {
     die("Error al obtener usuarios: " . $e->getMessage());
 }
 ?>
+<style>
+    h1 {
+        margin-top: 20px;
+    }
+</style>
 
 <div class="container-fluid">
     <h1 class="h3 mb-4 text-gray-800">Gestión de Usuarios</h1>

@@ -11,6 +11,12 @@ try {
 }
 ?>
 
+<style>
+    h1 {
+        margin-top: 20px;
+    }
+</style>
+
 <div class="container-fluid">
     <h1 class="h3 mb-4 text-gray-800">Gestión de Productos</h1>
 
