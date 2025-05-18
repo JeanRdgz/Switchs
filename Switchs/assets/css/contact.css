@@ -6,6 +6,8 @@
     --text: #ffffff;
     --hover: #3a0a61;
     --background-transparent: #00000069;
+    --alt_text: #222;
+    --alt_background: #47474788;
 }
 
 body, html {
@@ -97,9 +99,9 @@ body, html {
     padding: 12px 40px 12px 12px;
     border: none;
     border-radius: 8px;
-    background-color: #47474788;
+    background-color: var(--alt_background);
     font-size: 13px;
-    color: #222;
+    color: var(--text);
     margin-bottom: 0.5rem;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
@@ -110,9 +112,9 @@ body, html {
     border: none;
     border-radius: 8px;
     padding: 12px;
-    background-color: #47474788;
+    background-color: var(--alt_background);
     font-size: 13px;
-    color: #222;
+    color: var(--text);
     margin-bottom: 0.5rem;
     font-family: 'Poppins', sans-serif;
 }
@@ -137,7 +139,7 @@ body, html {
 }
 
 .contact-form-box button:hover {
-    background: var(--hover, #3a0a61);
+    background: var(--hover);
 }
 
 .input-box select,
@@ -146,8 +148,8 @@ body, html {
     padding: 12px 40px 12px 12px;
     border: none;
     border-radius: 8px;
-    background-color: #47474788;
-    color: var(--text);
+    background-color: var(--alt_background);
+    color: var(--alt_text);
     font-size: 13px;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
@@ -165,8 +167,8 @@ body, html {
 
 .input-box option,
 .contact-form-box option {
-    color: #222;
-    background: #fff;
+    color: var(--alt_text);
+    background: var(--text);
     font-family: 'Poppins', sans-serif;
     font-size: 13px;
 }
@@ -175,7 +177,7 @@ body, html {
 .input-box select:valid,
 .contact-form-box select:focus,
 .contact-form-box select:valid {
-    color: #222 !important;
+    color: var(--text) !important;
 }
 
 ::placeholder {
@@ -216,7 +218,7 @@ a:hover {
     height: 320px;
     border: none;
     border-radius: 16px;
-    background: #222;
+    background: var(--alt_text);
 }
 
 /* Responsive */

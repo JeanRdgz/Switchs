@@ -26,8 +26,8 @@
     <nav class="nav" id="nav">
         <ul class="nav-menu">
             <li><a href="../pages/index.php">Inicio</a></li>
-            <li><a href="#">Productos</a></li>
-            <li><a href="#">Personalizar</a></li>
+            <li><a href="../pages/products.php">Productos</a></li>
+            <li><a href="../pages/personalizar.php">Personalizar</a></li>
             <li><a href="../pages/contact.php">Contacto</a></li>
         </ul>
     </nav>
