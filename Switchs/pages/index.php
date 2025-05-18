@@ -107,6 +107,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
             </div>
         </section>
 
+        <!-- Newsletter Section con imagen -->
+        <div class="newsletter-row">
+            <section class="newsletter-section">
+                <img src="../assets/images/logo.png" alt="Logo" class="newsletter-logo">
+                <div class="newsletter-title">SUSCRÍBETE AL BOLETÍN INFORMATIVO</div>
+                <div class="newsletter-desc">Suscríbete para recibir noticias y promociones.</div>
+                <?php if (!empty($_SESSION['newsletter_success'])): ?>
+                    <div style="color:green;margin-bottom:1rem;">¡Gracias por suscribirte! Revisa tu correo.</div>
+                    <?php unset($_SESSION['newsletter_success']); ?>
+                <?php endif; ?>
+                <form class="newsletter-form" method="post" action="">
+                    <input type="email" name="newsletter_email" placeholder="Correo electrónico" required>
+                    <button type="submit"><i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+                <div class="newsletter-social">
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#"><i class="fa-brands fa-discord"></i></a>
+                </div>
+            </section>
+            <div class="newsletter-image-side">
+                <img src="../assets/images/slider11.webp" alt="Newsletter Imagen">
+            </div>
+        </div>
+
         <!-- Carrusel Instagram -->
         <div class="instagram-carousel-container">
             <div class="instagram-carousel-title">
@@ -141,33 +168,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
                     </div>
                 </div>
                 <button class="instagram-carousel-arrow right" id="insta-arrow-right">&#8250;</button>
-            </div>
-        </div>
-
-        <!-- Newsletter Section with Image -->
-        <div class="newsletter-row">
-            <section class="newsletter-section">
-                <img src="../assets/images/logo.png" alt="Logo" class="newsletter-logo">
-                <div class="newsletter-title">SUSCRÍBETE AL BOLETÍN INFORMATIVO</div>
-                <div class="newsletter-desc">Suscríbete para recibir noticias y promociones.</div>
-                <?php if (!empty($_SESSION['newsletter_success'])): ?>
-                    <div style="color:green;margin-bottom:1rem;">¡Gracias por suscribirte! Revisa tu correo.</div>
-                    <?php unset($_SESSION['newsletter_success']); ?>
-                <?php endif; ?>
-                <form class="newsletter-form" method="post" action="">
-                    <input type="email" name="newsletter_email" placeholder="Correo electrónico" required>
-                    <button type="submit"><i class="fa-solid fa-arrow-right"></i></button>
-                </form>
-                <div class="newsletter-social">
-                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="#"><i class="fa-brands fa-discord"></i></a>
-                </div>
-            </section>
-            <div class="newsletter-image-side">
-                <img src="../assets/images/slider11.webp" alt="Newsletter Imagen">
             </div>
         </div>
     </main>
