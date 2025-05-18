@@ -1,5 +1,14 @@
 <?php
 session_start();
+
+// Newsletter handler (solo muestra mensaje de éxito, no envía correo)
+$newsletter_success = false;
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) {
+    $newsletter_success = true;
+    $_SESSION['newsletter_success'] = true;
+    header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +43,37 @@ session_start();
             </div>
         </div>
 
+        <!-- sección "local stock" -->
+        <section class="section-local-stock">
+            <div class="local-stock-img">
+                <img src="../assets/images/slider5.webp" alt="Stock Local Switchs">
+            </div>
+            <div class="local-stock-info">
+                <div class="fast">¡Entrega rápida en 2-3 días!</div>
+                <h3>Stock Local</h3>
+                <ul>
+                    <li><b>2-3 días</b> de entrega rápida solo para clientes de España peninsular.</li>
+                    <li><b>4-7 días</b> de envío para el resto de Europa.</li>
+                </ul>
+                <a href="#" class="discover-btn">Descubrir ahora</a>
+            </div>
+        </section>
+
+        <!-- sección "local stock" con imagen a la derecha -->
+        <section class="section-local-stock-alt">
+            <div class="local-stock-img">
+                <img src="../assets/images/imageIndex1.webp" alt="Stock Internacional Switchs">
+            </div>
+            <div class="local-stock-info">
+                <div class="fast">¡Conoce un poco más!</div>
+                <h3>Estructura</h3>
+                <p>
+                    Nuestros teclados están diseñados con una estructura premium y modular, pensada para ofrecer la mejor experiencia de escritura y personalización. Cada componente, desde las keycaps PBT double-shot hasta la base de silicona y las alturas ajustables, ha sido seleccionado para maximizar la durabilidad, el confort y el rendimiento. Disfruta de una construcción robusta, materiales de alta calidad y una estética cuidada en cada detalle.
+                </p>
+            </div>
+        </section>
+
+        <!--seccion de contacto-->
         <section class="section-contact">
             <div class="section-item">
                 <i class="fa-solid fa-truck-fast"></i>
@@ -57,6 +97,7 @@ session_start();
             </div>
         </section>
 
+        <!-- seccion "imagen parallax" -->
         <section class="section-image">
             <div class="section-image-item">
                 <div class="section-image-text">
@@ -66,25 +107,73 @@ session_start();
             </div>
         </section>
 
-        <!-- Nueva sección tipo "local stock" -->
-        <section class="section-local-stock">
-            <div class="local-stock-img">
-                <img src="../assets/images/slider5.webp" alt="Stock Local Switchs">
+        <!-- Carrusel Instagram -->
+        <div class="instagram-carousel-container">
+            <div class="instagram-carousel-title">
+                Síguenos en Instagram <b>@switchs.eu</b>
             </div>
-            <div class="local-stock-info">
-                <div class="fast">¡Entrega rápida en 2-3 días!</div>
-                <h3>Stock Local</h3>
-                <ul>
-                    <li><b>2-3 días</b> de entrega rápida solo para clientes de España peninsular.</li>
-                    <li><b>4-7 días</b> de envío para el resto de Europa.</li>
-                </ul>
-                <a href="#" class="discover-btn">Descubrir ahora</a>
+            <div class="instagram-carousel-wrapper">
+                <button class="instagram-carousel-arrow left" id="insta-arrow-left">&#8249;</button>
+                <div class="instagram-carousel" id="instagram-carousel">
+                    <div class="instagram-carousel-image">
+                        <img src="../assets/images/slider1.webp" alt="Instagram 1">
+                    </div>
+                    <div class="instagram-carousel-image">
+                        <img src="../assets/images/slider4.webp" alt="Instagram 2">
+                    </div>
+                    <div class="instagram-carousel-image">
+                        <img src="../assets/images/slider12.jpeg" alt="Instagram 3">
+                    </div>
+                    <div class="instagram-carousel-image">
+                        <img src="../assets/images/slider8.webp" alt="Instagram 4">
+                    </div>
+                    <div class="instagram-carousel-image">
+                        <img src="../assets/images/slider6.webp" alt="Instagram 5">
+                    </div>
+                    <div class="instagram-carousel-image">
+                        <img src="../assets/images/slider9.avif" alt="Instagram 6">
+                    </div>
+                    <div class="instagram-carousel-image">
+                        <img src="../assets/images/slider3.webp" alt="Instagram 7">
+                    </div>
+                    <div class="instagram-carousel-image">
+                        <img src="../assets/images/bannerLogin.webp" alt="Instagram 8">
+                    </div>
+                </div>
+                <button class="instagram-carousel-arrow right" id="insta-arrow-right">&#8250;</button>
             </div>
-        </section>
+        </div>
 
+        <!-- Newsletter Section with Image -->
+        <div class="newsletter-row">
+            <section class="newsletter-section">
+                <img src="../assets/images/logo.png" alt="Logo" class="newsletter-logo">
+                <div class="newsletter-title">SUSCRÍBETE AL BOLETÍN INFORMATIVO</div>
+                <div class="newsletter-desc">Suscríbete para recibir noticias y promociones.</div>
+                <?php if (!empty($_SESSION['newsletter_success'])): ?>
+                    <div style="color:green;margin-bottom:1rem;">¡Gracias por suscribirte! Revisa tu correo.</div>
+                    <?php unset($_SESSION['newsletter_success']); ?>
+                <?php endif; ?>
+                <form class="newsletter-form" method="post" action="">
+                    <input type="email" name="newsletter_email" placeholder="Correo electrónico" required>
+                    <button type="submit"><i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+                <div class="newsletter-social">
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#"><i class="fa-brands fa-discord"></i></a>
+                </div>
+            </section>
+            <div class="newsletter-image-side">
+                <img src="../assets/images/slider11.webp" alt="Newsletter Imagen">
+            </div>
+        </div>
     </main>
     <?php include '../components/footer.php'; ?>
     <script src="../assets/js/slider.js"></script>
+    <script src="../assets/js/instagram-carousel.js"></script>
 </body>
 
 </html>

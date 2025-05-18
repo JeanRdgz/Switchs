@@ -6,6 +6,7 @@
     --text: #ffffff;
     --hover: #3a0a61;
     --background-transparent: #00000069;
+    --alt_text: #222;
 }
 
 body {
@@ -62,6 +63,7 @@ body {
     z-index: 1;
 }
 
+/*Section de contacto*/
 .section-contact {
     width: calc(100% - 4rem);
     max-width: 1200px;
@@ -108,10 +110,12 @@ body {
 
 .section-contact .section-item p {
     font-size: 1rem;
-    color: #444;
+    color: var(--alt_text);
     margin: 0;
 }
 
+
+/*section de imagen parallax*/
 .section-image {
     width: 100vw;
     min-height: 320px;
@@ -139,7 +143,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #fff;
+    color: var(--text);
     text-align: center;
 }
 
@@ -156,7 +160,7 @@ body {
     line-height: 1.6;
 }
 
-/* Nueva sección tipo "local stock" */
+/* sección "stock local" */
 .section-local-stock {
     width: calc(100% - 4rem);
     max-width: 1200px;
@@ -171,9 +175,9 @@ body {
 }
 
 .section-local-stock .local-stock-img {
-    flex: 1 1 350px;
-    min-width: 280px;
-    max-width: 420px;
+    flex: 2 1 0;
+    min-width: 0;
+    max-width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -181,22 +185,23 @@ body {
 
 .section-local-stock .local-stock-img img {
     width: 100%;
-    max-width: 500px;
+    max-width: 650px;
     aspect-ratio: 2 / 1;
     object-fit: cover;
     box-shadow: 0 2px 16px 0 rgba(31,38,135,0.10);
-    background: #f7f7f7;
+    background: var(--text);
 }
 
 .section-local-stock .local-stock-info {
-    flex: 1 1 350px;
-    min-width: 260px;
-    max-width: 600px;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: #222;
+    color: var(--alt_text);
     padding: 0 1rem;
+    align-items: flex-start;
 }
 
 .section-local-stock .local-stock-info h3 {
@@ -216,7 +221,7 @@ body {
 .section-local-stock .local-stock-info ul {
     margin: 0.7rem 0 1.2rem 1.2rem;
     padding: 0;
-    color: #333;
+    color: var(--alt_text);
     font-size: 1rem;
 }
 
@@ -229,7 +234,7 @@ body {
     margin-top: 1rem;
     padding: 10px 28px;
     background: var(--primary);
-    color: #fff;
+    color: var(--text);
     border: none;
     border-radius: 22px;
     font-size: 1rem;
@@ -238,7 +243,7 @@ body {
     transition: background 0.2s, transform 0.2s;
     cursor: pointer;
     box-shadow: 0 2px 10px 0 rgba(31,38,135,0.08);
-    width: auto;         /* Solo lo que mide el texto */
+    width: auto;
     min-width: unset;
     max-width: none;
 }
@@ -246,6 +251,65 @@ body {
 .section-local-stock .local-stock-info .discover-btn:hover {
     background: var(--hover, #3a0a61);
     transform: scale(1.04);
+}
+
+/* sección "stock local" con imagen a la derecha */
+.section-local-stock-alt {
+    width: calc(100% - 4rem);
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem 2rem;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.section-local-stock-alt .local-stock-img {
+    flex: 2 1 0;
+    min-width: 0;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-local-stock-alt .local-stock-img img {
+    width: 100%;
+    max-width: 700px;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+    box-shadow: 0 2px 16px 0 rgba(31,38,135,0.10);
+    background: var(--text);
+}
+
+.section-local-stock-alt .local-stock-info {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--alt_text, #222);
+    padding: 0 1rem;
+    align-items: flex-end;
+    text-align: justify !important;
+}
+
+.section-local-stock-alt .local-stock-info h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.5rem 0 1rem 0;
+    color: var(--primary);
+}
+
+.section-local-stock-alt .local-stock-info .fast {
+    font-weight: bold;
+    color: #222;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
 }
 
 @media (max-width: 900px) {
@@ -258,5 +322,301 @@ body {
     .section-local-stock .local-stock-info {
         max-width: 100%;
         padding: 0;
+    }
+    .section-local-stock .local-stock-info {
+        align-items: center;
+        text-align: center;
+    }
+    .section-local-stock-alt {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.5rem 1rem;
+    }
+    .section-local-stock-alt .local-stock-img,
+    .section-local-stock-alt .local-stock-info {
+        max-width: 100%;
+        padding: 0;
+    }
+    .section-local-stock-alt .local-stock-info {
+        align-items: center;
+        text-align: justify !important;
+    }
+}
+
+/* Instagram Carousel Styles */
+.instagram-carousel-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 2.5rem auto 2.5rem auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.instagram-carousel-title {
+    text-align: center;
+    color: var(--primary);
+    font-size: 1.25rem;
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+.instagram-carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.instagram-carousel {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+    will-change: transform;
+}
+
+.instagram-carousel-image {
+    flex: 0 0 calc((100% - 25px) / 6);
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #eee;
+    box-shadow: 0 2px 8px 0 rgba(31,38,135,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instagram-carousel-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}
+
+.instagram-carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff;
+    color: #6a0dad;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+    box-shadow: 0 2px 8px 0 rgba(31,38,135,0.10);
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.85;
+    transition: background 0.2s, color 0.2s;
+}
+.instagram-carousel-arrow:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+.instagram-carousel-arrow.left {
+    left: 10px;
+}
+.instagram-carousel-arrow.right {
+    right: 10px;
+}
+
+@media (max-width: 900px) {
+    .instagram-carousel-image {
+        flex: 0 0 calc((100% - 5px) / 2);
+    }
+}
+
+@media (max-width: 600px) {
+    .instagram-carousel-container {
+        padding: 0 0.2rem;
+    }
+    .instagram-carousel-arrow.left {
+        left: 5px;
+    }
+    .instagram-carousel-arrow.right {
+        right: 5px;
+    }
+}
+
+/* Newsletter Section */
+.newsletter-section {
+    width: 100%;
+    max-width: 390px;
+    margin: 3rem auto 2rem auto;
+    background: var(--text);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px 0 rgba(31,38,135,0.10);
+    padding: 2.5rem 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.newsletter-logo {
+    width: 70px;
+    margin-bottom: 1.2rem;
+}
+
+.newsletter-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--alt_text);
+    margin-bottom: 0.7rem;
+    letter-spacing: -1px;
+}
+
+.newsletter-desc {
+    color: var(--alt_text);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.newsletter-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.2rem;
+}
+
+.newsletter-form input[type="email"] {
+    flex: 1 1 0;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--text);
+    border-radius: 8px 0 0 8px;
+    font-size: 1rem;
+    outline: none;
+    background: var(--text);
+    color: var(--alt_text);
+    transition: border 0.2s;
+}
+
+.newsletter-form input[type="email"]:focus {
+    border-color: var(--primary);
+}
+
+.newsletter-form button {
+    padding: 0.8rem 1.1rem;
+    border: none;
+    background: var(--primary);
+    color: var(--text);
+    border-radius: 0 8px 8px 0;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.newsletter-form button:hover {
+    background: var(--hover);
+    transform: scale(1.05);
+}
+
+.newsletter-social {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    margin-top: 1.2rem;
+}
+
+.newsletter-social a {
+    color: #222;
+    font-size: 1.35rem;
+    transition: color 0.2s;
+}
+
+.newsletter-social a:hover {
+    color: var(--primary);
+}
+
+.newsletter-row {
+    width: 100%;
+    max-width: 1100px;
+    margin: 3rem auto 2rem auto;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    gap: 1rem;
+    box-sizing: border-box;
+}
+
+.newsletter-section {
+    flex: 1 1 340px;
+    max-width: 380px;
+    min-width: 260px;
+    background: var(--text);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px 0 rgba(31,38,135,0.10);
+    padding: 2.5rem 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.newsletter-image-side {
+    flex: 2 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    max-width: fit-content;
+}
+
+.newsletter-image-side img {
+    width: 100%;
+    max-width: 600px;
+    object-fit: cover;
+    aspect-ratio: 1.5 / 1;
+    box-shadow: 0 4px 24px 0 rgba(31,38,135,0.08);
+    border-radius: 5px;
+}
+
+@media (max-width: 900px) {
+    .newsletter-row {
+        flex-direction: column;
+        gap: 1.5rem;
+        max-width: 95vw;
+    }
+    .newsletter-section {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    .newsletter-image-side {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .newsletter-section {
+        padding: 1.5rem 1rem;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .newsletter-row {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+    .newsletter-form input[type="email"] {
+        font-size: 0.95rem;
+    }
+    .newsletter-form button {
+        font-size: 1rem;
     }
 }
