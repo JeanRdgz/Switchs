@@ -37,7 +37,7 @@ session_start();
 
         <div class="personalizar-container">
             <div class="personalizar-img-sticky">
-                <img src="../assets/images/personalizarImage1.webp" alt="Personaliza tu teclado">
+                <img src="../assets/images/slider12.jpeg" alt="Personaliza tu teclado">
             </div>
             <div class="personalizar-content">
                 <h1>Personaliza tu teclado</h1>
@@ -83,14 +83,21 @@ session_start();
                 </div>
                 <div class="personalizar-dinamico-group">
                     <label>Keycaps:</label>
-                    <div class="personalizar-dinamico-buttons" id="layout-options">
-                        <button class="personalizar-dinamico-btn active" data-img="../assets/images/switch8.webp">V3 Piano Pro - Clicky</button>
-                        <button class="personalizar-dinamico-btn" data-img="../assets/images/switch9.webp">Rosewood - Linear</button>
-                        <button class="personalizar-dinamico-btn" data-img="../assets/images/switch10.webp">Botany - Tactile</button>
+                    <div class="personalizar-dinamico-buttons" id="keycap-options">
+                        <button class="personalizar-dinamico-btn active" data-img="../assets/images/keycap11.webp">Timeline Black</button>
+                        <button class="personalizar-dinamico-btn" data-img="../assets/images/keycap10.webp">Rainbow</button>
+                        <button class="personalizar-dinamico-btn" data-img="../assets/images/keycap9.webp">Retro 80</button>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Botón agregar al carrito -->
+        <div style="width:100%;display:flex;justify-content:center;margin:2.5rem 0;">
+            <button id="add-to-cart-btn" class="personalizar-btn" style="min-width:220px;font-size:1.15rem;">
+                Agregar al carrito
+            </button>
+        </div>
     </main>
     <?php include '../components/footer.php'; ?>
     <script src="../assets/js/slider.js"></script>
@@ -122,7 +129,17 @@ session_start();
         }
         setupPersonalizarOptions('color-options');
         setupPersonalizarOptions('layout-options');
+        setupPersonalizarOptions('keycap-options');
+
+        // Agregar al carrito: requiere login
+        document.getElementById('add-to-cart-btn').addEventListener('click', function() {
+            <?php if (empty($_SESSION['user_id'])): ?>
+                window.location.href = '/Switchs/Switchs/pages/login.php';
+            <?php else: ?>
+                alert('Producto agregado al carrito.');
+                // Aquí puedes agregar la lógica real de agregar al carrito
+            <?php endif; ?>
+        });
     </script>
 </body>
-
 </html>

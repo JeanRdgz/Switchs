@@ -116,8 +116,8 @@ body {
 }
 
 .logout-button {
-    background-color: var(--primary); 
-    color: var(--text); 
+    background-color: var(--primary);
+    color: var(--text);
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
@@ -141,7 +141,7 @@ body {
 
 .welcome-message i {
     font-size: 20px;
-    padding-right:10px;
+    padding-right: 10px;
 }
 
 /* ---------- Responsive ---------- */
@@ -187,10 +187,17 @@ body {
         flex-direction: column;
         gap: 0px;
     }
+
     .nav-menu li {
         margin: 3px 3px;
     }
-    .nav-menu li a{
+
+    .nav-menu li a {
         padding: 2px 2px;
+    }
+
+    .main-header.sticky {
+        padding-top: 0.5rem !important;
+        padding: 2em 3rem;
     }
 }

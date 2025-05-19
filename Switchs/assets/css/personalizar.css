@@ -81,7 +81,7 @@ body {
     flex: 0 0 420px;
     max-width: 420px;
     position: sticky;
-    top: 110px;
+    top: 130px;
     align-self: flex-start;
     height: 420px;
     display: flex;
@@ -114,7 +114,7 @@ body {
     font-weight: bold;
     color: var(--primary);
     margin-top: 0 !important;
-    text-align: left; 
+    text-align: left;
 }
 
 .personalizar-content h2 {
@@ -190,8 +190,8 @@ body {
     justify-content: center;
     background: #fff;
     border-radius: 14px;
-    box-shadow: 0 2px 16px 0 rgba(31,38,135,0.10);
-    padding: 1.5rem;
+    box-shadow: 0 2px 16px 0 rgba(31, 38, 135, 0.10);
+    padding: 2.5rem; /* Aumenta el padding para imagen más grande */
 }
 
 .personalizar-dinamico-img img {
@@ -228,6 +228,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 0.7rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 
 .personalizar-dinamico-btn {
@@ -250,76 +252,63 @@ body {
     border: 2px solid var(--primary);
 }
 
+@media (max-width: 1200px) {
+    #personalizar-dinamico-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        max-width: 98vw;
+    }
+
+    .personalizar-dinamico-img {
+        max-width: 520px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .personalizar-dinamico-options {
+        width: 100%;
+        align-items: center;
+    }
+}
+
 @media (max-width: 900px) {
     .personalizar-container {
         flex-direction: column;
         gap: 2rem;
-        padding: 1.5rem 0.5rem;
+        padding: 2rem 2rem;
         align-items: stretch;
-        width: 100vw;
+        width: 100%;
         max-width: 100vw;
         box-sizing: border-box;
+        margin: 0 auto;
     }
     .personalizar-img-sticky {
         position: static;
         width: 100%;
         max-width: 100%;
+        height: 320px;
         margin: 0 auto 1.2rem auto;
         align-self: stretch;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-        box-sizing: border-box;
-        height: auto;
-        aspect-ratio: 1 / 1;
-    }
-    .personalizar-img-sticky img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 1 / 1;
-        border-radius: 18px;
-        object-fit: cover;
-        display: block;
     }
     .personalizar-content {
         padding: 1.5rem 1rem;
         max-width: 100%;
         margin-left: 0;
     }
-    #personalizar-dinamico-section {
-        flex-direction: column;
-        gap: 1.5rem;
-        max-width: 98vw;
-    }
-    .personalizar-dinamico-img {
-        max-width: 320px;
-        margin: 0 auto;
-    }
-    .personalizar-dinamico-options {
-        width: 100%;
-        align-items: stretch;
-    }
 }
 
 @media (max-width: 600px) {
-    .personalizar-container {
-        padding: 1rem 1rem;
-        width: 100vw;
-        max-width: 100vw;
+    .personalizar-dinamico-img {
+        max-width: 360px;
+        width: 100%;
+        padding: 0.7rem;
     }
-    .personalizar-img-sticky {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-    }
-    .personalizar-content {
-        padding: 1rem 0.5rem;
-        max-width: 100vw;
-    }
-    .personalizar-img-sticky {
-        height: auto;
-        aspect-ratio: 1 / 1;
-    }
-    .personalizar-img-sticky img {
-        height: auto;
-        aspect-ratio: 1 / 1;
+
+    .personalizar-dinamico-options {
+        width: 90%;
+        align-items: center;
+        text-align: center;
     }
 }
