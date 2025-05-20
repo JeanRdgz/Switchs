@@ -1,7 +1,27 @@
 <?php
 session_start();
+require_once '../includes/config.php';
+
 $error_message = isset($_SESSION["error_message"]) ? $_SESSION["error_message"] : "";
 unset($_SESSION["error_message"]);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $correo = $_POST['correo'] ?? '';
+    $password = $_POST['contraseña'] ?? '';
+
+    $stmt = $pdo->prepare("SELECT id_usuario, nombre, contraseña FROM usuario WHERE correo = :correo LIMIT 1");
+    $stmt->execute([':correo' => $correo]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && password_verify($password, $user['contraseña'])) {
+        $_SESSION['id_usuario'] = $user['id_usuario'];
+        $_SESSION['usuario'] = $user['nombre'];
+        header("Location: products.php");
+        exit;
+    } else {
+        $error_message = "Usuario o contraseña incorrectos.";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,6 +32,7 @@ unset($_SESSION["error_message"]);
     <title>Switch's</title>
     <style>
         @import url(../assets/css/login.css);
+
         .error-message {
             color: white;
             font-size: 14px;
@@ -40,7 +61,7 @@ unset($_SESSION["error_message"]);
                 <?php if (!empty($error_message)): ?>
                     <div class="error-message"><?php echo $error_message; ?></div>
                 <?php endif; ?>
-                <form method="POST" action="../controllers/loginController.php" name="form-ingresar">
+                <form method="POST" action="" name="form-ingresar">
                     <div class="input-box">
                         <input type="email" name="correo" required placeholder="Correo">
                         <i class="fa-solid fa-envelope"></i>

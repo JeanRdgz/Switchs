@@ -17,7 +17,7 @@
             <?php else: ?>
                 <a href="../pages/login.php" class="user-icon"><i class="fa-solid fa-user"></i></a>
             <?php endif; ?>
-            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="../pages/carrito.php"><i class="fa-solid fa-cart-shopping"></i></a>
             <button class="menu-toggle" id="menu-toggle">
                 <i class="fa-solid fa-bars"></i>
             </button>

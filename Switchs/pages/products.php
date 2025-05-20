@@ -2,47 +2,6 @@
 session_start();
 require_once '../includes/config.php';
 
-// Lógica para agregar al carrito
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-    if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
-        header("Location: login.php");
-        exit;
-    }
-    $id_usuario = $_SESSION['user_id'];
-    $id_producto = intval($_POST['product_id']);
-    $cantidad = max(1, intval($_POST['cantidad']));
-
-    // Buscar o crear carrito del usuario
-    $stmt = $pdo->prepare("SELECT id_carrito FROM carrito WHERE id_usuario = ?");
-    $stmt->execute([$id_usuario]);
-    $carrito = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($carrito) {
-        $id_carrito = $carrito['id_carrito'];
-    } else {
-        $pdo->prepare("INSERT INTO carrito (id_usuario) VALUES (?)")->execute([$id_usuario]);
-        $id_carrito = $pdo->lastInsertId();
-    }
-
-    // Verificar si el producto ya está en el carrito
-    $stmt = $pdo->prepare("SELECT cantidad FROM carrito_producto WHERE id_carrito = ? AND id_producto = ?");
-    $stmt->execute([$id_carrito, $id_producto]);
-    $carrito_producto = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($carrito_producto) {
-        // Actualizar cantidad sumando la seleccionada
-        $nueva_cantidad = $carrito_producto['cantidad'] + $cantidad;
-        $pdo->prepare("UPDATE carrito_producto SET cantidad = ? WHERE id_carrito = ? AND id_producto = ?")
-            ->execute([$nueva_cantidad, $id_carrito, $id_producto]);
-    } else {
-        // Insertar nuevo producto en el carrito con la cantidad seleccionada
-        $pdo->prepare("INSERT INTO carrito_producto (id_carrito, id_producto, cantidad) VALUES (?, ?, ?)")
-            ->execute([$id_carrito, $id_producto, $cantidad]);
-    }
-    $carrito_msg = "Producto agregado al carrito.";
-}
-
-// Obtener productos de la base de datos
 try {
     $stmt = $pdo->query("SELECT * FROM producto");
     $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -84,12 +43,6 @@ try {
             </div>
         </div>
 
-        <?php if (!empty($carrito_msg)): ?>
-            <div style="max-width:1200px;margin:1rem auto;color:green;text-align:center;font-weight:bold;">
-                <?= htmlspecialchars($carrito_msg) ?>
-            </div>
-        <?php endif; ?>
-
         <section class="products-section">
             <div class="products-container">
                 <?php foreach ($productos as $producto): ?>
@@ -114,10 +67,10 @@ try {
                                 €<?= number_format($producto['precio'], 2) ?>
                             </div>
                             <div class="product-actions">
-                                <form method="post">
-                                    <input type="hidden" name="product_id" value="<?= $producto['id_producto'] ?>">
+                                <form class="add-to-cart-form" onsubmit="return false;">
+                                    <input type="hidden" name="id_producto" value="<?= $producto['id_producto'] ?>">
                                     <input type="number" name="cantidad" min="1" max="<?= intval($producto['stock']) ?>" value="1">
-                                    <button type="submit" name="add_to_cart" class="product-btn same-size-btn">Agregar</button>
+                                    <button type="button" class="product-btn same-size-btn" onclick="agregarAlCarrito(this)">Agregar</button>
                                 </form>
                             </div>
                         </div>
@@ -128,6 +81,30 @@ try {
     </main>
     <?php include '../components/footer.php'; ?>
     <script src="../assets/js/slider.js"></script>
+    <script>
+    function agregarAlCarrito(btn) {
+        const form = btn.closest('form');
+        const id_producto = form.querySelector('input[name="id_producto"]').value;
+        const cantidad = form.querySelector('input[name="cantidad"]').value;
+
+        fetch('agregar_carrito.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: `id_producto=${encodeURIComponent(id_producto)}&cantidad=${encodeURIComponent(cantidad)}`
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message || 'Producto agregado al carrito');
+            } else if (data.message && data.message.includes('iniciar sesión')) {
+                window.location.href = 'login.php';
+            } else {
+                alert(data.message || 'Error al agregar al carrito');
+            }
+        })
+        .catch(() => alert('Error de conexión con el servidor.'));
+    }
+    </script>
 </body>
 
 </html>
