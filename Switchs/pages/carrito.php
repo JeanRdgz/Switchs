@@ -9,7 +9,7 @@ if (!$id_usuario) {
 }
 
 // Obtener el carrito del usuario
-$stmt = $pdo->prepare("SELECT id_carrito FROM carrito WHERE id_usuario = ?");
+$stmt = $pdo->prepare("SELECT id_carrito FROM Carrito WHERE id_usuario = ?");
 $stmt->execute([$id_usuario]);
 $carrito = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -18,8 +18,8 @@ if ($carrito) {
     $id_carrito = $carrito['id_carrito'];
     $stmt = $pdo->prepare(
         "SELECT cp.*, p.nombre, p.precio, p.imagen_url
-         FROM carrito_producto cp
-         JOIN producto p ON cp.id_producto = p.id_producto
+         FROM Carrito_producto cp
+         JOIN Producto p ON cp.id_producto = p.id_producto
          WHERE cp.id_carrito = ?"
     );
     $stmt->execute([$id_carrito]);

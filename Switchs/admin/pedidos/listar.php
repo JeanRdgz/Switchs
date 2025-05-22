@@ -5,13 +5,13 @@ include '../templates/sidebar.php';
 
 try {
     // Obtener todos los pedidos
-    $stmt = $pdo->query("SELECT * FROM pedido");
+    $stmt = $pdo->query("SELECT * FROM Pedido");
     $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Calcular el total real de cada pedido sumando los detalles
     $totales = [];
     foreach ($pedidos as $pedido) {
-        $stmtDetalle = $pdo->prepare("SELECT SUM(precio_unitario * cantidad) as total FROM detalle_pedido WHERE id_pedido = :id_pedido");
+        $stmtDetalle = $pdo->prepare("SELECT SUM(precio_unitario * cantidad) as total FROM Pedido_producto WHERE id_pedido = :id_pedido");
         $stmtDetalle->execute([':id_pedido' => $pedido['id_pedido']]);
         $row = $stmtDetalle->fetch(PDO::FETCH_ASSOC);
         $totales[$pedido['id_pedido']] = $row['total'] ?? 0;

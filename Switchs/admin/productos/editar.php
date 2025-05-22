@@ -15,7 +15,7 @@ if (!$id) {
 
 // Obtener datos del producto
 try {
-    $stmt = $pdo->prepare("SELECT * FROM producto WHERE id_producto = :id");
+    $stmt = $pdo->prepare("SELECT * FROM Producto WHERE id_producto = :id");
     $stmt->execute([':id' => $id]);
     $producto = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Actualizar si no hay errores
     if (empty($errores)) {
         try {
-            $sql = "UPDATE producto SET 
+            $sql = "UPDATE Producto SET 
                         nombre = :nombre, 
                         descripcion = :descripcion, 
                         precio = :precio, 

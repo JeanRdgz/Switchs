@@ -4,7 +4,7 @@ include '../templates/header.php';
 include '../templates/sidebar.php';
 
 try {
-    $stmt = $pdo->query("SELECT * FROM usuario");
+    $stmt = $pdo->query("SELECT * FROM Usuario");
     $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Error al obtener usuarios: " . $e->getMessage());
@@ -38,7 +38,7 @@ try {
                     <td><?= htmlspecialchars($usuario['id_usuario']) ?></td>
                     <td><?= htmlspecialchars($usuario['nombre']) ?></td>
                     <td><?= htmlspecialchars($usuario['correo']) ?></td>
-                    <td><?= htmlspecialchars($usuario['dirección_envío']) ?></td>
+                    <td><?= htmlspecialchars($usuario['direccion_envio']) ?></td>
                     <td><?= htmlspecialchars($usuario['fecha_registro']) ?></td>
                     <td>
                         <a href="editar.php?id=<?= $usuario['id_usuario'] ?>" class="btn btn-sm btn-warning">Editar</a>

@@ -9,7 +9,7 @@ if (!$id) {
 }
 
 try {
-    $stmt = $pdo->prepare("DELETE FROM usuario WHERE id_usuario = :id");
+    $stmt = $pdo->prepare("DELETE FROM Usuario WHERE id_usuario = :id");
     $stmt->execute([':id' => $id]);
     header("Location: listar.php?mensaje=eliminado");
     exit;

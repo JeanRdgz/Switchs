@@ -46,7 +46,7 @@ unset($_SESSION["error_message"]);
                         <i class="fa-solid fa-user"></i>
                     </div>
                     <div class="input-box">
-                        <input type="text" name="direccion" required placeholder="Dirección">
+                        <input type="text" name="direccion_envio" required placeholder="Dirección">
                         <i class="fa-solid fa-location-dot"></i>
                     </div>
                     <div class="input-box">
@@ -67,5 +67,4 @@ unset($_SESSION["error_message"]);
     </main>
     <?php include '../components/footer.php'; ?>
 </body>
-
 </html>

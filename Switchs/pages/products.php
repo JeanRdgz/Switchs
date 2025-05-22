@@ -3,7 +3,7 @@ session_start();
 require_once '../includes/config.php';
 
 try {
-    $stmt = $pdo->query("SELECT * FROM producto");
+    $stmt = $pdo->query("SELECT * FROM Producto");
     $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $productos = [];
@@ -56,7 +56,7 @@ try {
                         </div>
                         <div class="product-info">
                             <div class="product-title"><?= htmlspecialchars($producto['nombre']) ?></div>
-                            <div class="product-stars">
+                            <div class="product-stars
                                 <i class="fa-solid fa-star" style="color: var(--primary);"></i>
                                 <i class="fa-solid fa-star" style="color: var(--primary);"></i>
                                 <i class="fa-solid fa-star" style="color: var(--primary);"></i>

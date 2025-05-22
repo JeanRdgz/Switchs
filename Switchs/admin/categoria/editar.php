@@ -14,7 +14,7 @@ if (!$id) {
 }
 
 try {
-    $stmt = $pdo->prepare("SELECT * FROM categoria WHERE id_categoria = :id");
+    $stmt = $pdo->prepare("SELECT * FROM Categoria WHERE id_categoria = :id");
     $stmt->execute([':id' => $id]);
     $categoria = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errores)) {
         try {
-            $sql = "UPDATE categoria SET nombre = :nombre, descripcion = :descripcion WHERE id_categoria = :id";
+            $sql = "UPDATE Categoria SET nombre = :nombre, descripcion = :descripcion WHERE id_categoria = :id";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
                 ':nombre' => $nombre,

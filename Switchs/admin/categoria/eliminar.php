@@ -9,7 +9,7 @@ if (!$id) {
 }
 
 try {
-    $stmt = $pdo->prepare("DELETE FROM categoria WHERE id_categoria = :id");
+    $stmt = $pdo->prepare("DELETE FROM Categoria WHERE id_categoria = :id");
     $stmt->execute([':id' => $id]);
     header("Location: listar.php?mensaje=eliminado");
     exit;

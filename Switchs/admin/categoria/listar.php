@@ -4,7 +4,7 @@ include '../templates/header.php';
 include '../templates/sidebar.php';
 
 try {
-    $stmt = $pdo->query("SELECT * FROM categoria");
+    $stmt = $pdo->query("SELECT * FROM Categoria");
     $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Error al obtener categorías: " . $e->getMessage());

@@ -13,7 +13,7 @@ if (!$id_pedido) {
 
 // Obtener información del pedido
 try {
-    $stmtPedido = $pdo->prepare("SELECT * FROM pedido WHERE id_pedido = :id_pedido");
+    $stmtPedido = $pdo->prepare("SELECT * FROM Pedido WHERE id_pedido = :id_pedido");
     $stmtPedido->execute([':id_pedido' => $id_pedido]);
     $pedido = $stmtPedido->fetch(PDO::FETCH_ASSOC);
 
@@ -26,7 +26,7 @@ try {
     // Obtener nombre del usuario
     $nombre_usuario = '';
     if (!empty($pedido['id_usuario'])) {
-        $stmtUsuario = $pdo->prepare("SELECT nombre FROM usuario WHERE id_usuario = :id_usuario");
+        $stmtUsuario = $pdo->prepare("SELECT nombre FROM Usuario WHERE id_usuario = :id_usuario");
         $stmtUsuario->execute([':id_usuario' => $pedido['id_usuario']]);
         $usuario = $stmtUsuario->fetch(PDO::FETCH_ASSOC);
         $nombre_usuario = $usuario ? $usuario['nombre'] : 'Usuario no encontrado';
@@ -35,8 +35,8 @@ try {
     // Obtener detalles del pedido
     $stmtDetalles = $pdo->prepare(
         "SELECT dp.*, p.nombre AS producto_nombre 
-         FROM detalle_pedido dp
-         LEFT JOIN producto p ON dp.id_producto = p.id_producto
+         FROM Pedido_producto dp
+         LEFT JOIN Producto p ON dp.id_producto = p.id_producto
          WHERE dp.id_pedido = :id_pedido"
     );
     $stmtDetalles->execute([':id_pedido' => $id_pedido]);

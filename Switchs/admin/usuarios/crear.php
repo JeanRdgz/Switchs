@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errores)) {
         try {
-            $sql = "INSERT INTO usuario (nombre, correo, dirección_envío, contraseña)
+            $sql = "INSERT INTO Usuario (nombre, correo, direccion_envio, contraseña)
                     VALUES (:nombre, :correo, :direccion_envio, :contrasena)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([

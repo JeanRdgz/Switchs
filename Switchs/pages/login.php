@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $correo = $_POST['correo'] ?? '';
     $password = $_POST['contraseña'] ?? '';
 
-    $stmt = $pdo->prepare("SELECT id_usuario, nombre, contraseña FROM usuario WHERE correo = :correo LIMIT 1");
+    $stmt = $pdo->prepare("SELECT id_usuario, nombre, contraseña FROM Usuario WHERE correo = :correo LIMIT 1");
     $stmt->execute([':correo' => $correo]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 

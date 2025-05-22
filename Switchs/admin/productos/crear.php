@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Insertar en la base de datos si no hay errores
     if (empty($errores)) {
         try {
-            $sql = "INSERT INTO producto (nombre, descripcion, precio, stock, imagen_url, id_categoria)
+            $sql = "INSERT INTO Producto (nombre, descripcion, precio, stock, imagen_url, id_categoria)
                     VALUES (:nombre, :descripcion, :precio, :stock, :imagen_url, :id_categoria)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([

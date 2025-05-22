@@ -4,18 +4,15 @@ include '../templates/header.php';
 include '../templates/sidebar.php';
 
 try {
-    $stmt = $pdo->query("SELECT * FROM producto");
+    $stmt = $pdo->query("SELECT * FROM Producto");
     $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Error al obtener productos: " . $e->getMessage());
 }
 ?>
+<link href="Switchs/Switchs/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-<style>
-    h1 {
-        margin-top: 20px;
-    }
-</style>
+
 
 <div class="container-fluid">
     <h1 class="h3 mb-4 text-gray-800">Gestión de Productos</h1>

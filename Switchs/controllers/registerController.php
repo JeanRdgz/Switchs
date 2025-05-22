@@ -8,7 +8,7 @@ require_once '../includes/config.php';
 if (isset($_POST["register"])) {
     $nombre = $_POST["nombre"];
     $correo = $_POST["correo"];
-    $direccion = $_POST["direccion"];
+    $direccion = $_POST["direccion_envio"];
     $password = password_hash($_POST["contraseña"], PASSWORD_DEFAULT);
 
     // Verificar si el correo ya existe
@@ -24,7 +24,7 @@ if (isset($_POST["register"])) {
         exit();
     }
 
-    $sql = "INSERT INTO Usuario (nombre, correo, dirección_envío, contraseña, fecha_registro) 
+    $sql = "INSERT INTO Usuario (nombre, correo, direccion_envio, contraseña, fecha_registro) 
             VALUES (:nombre, :correo, :direccion, :password, NOW())";
 
     $stmt = $pdo->prepare($sql);
