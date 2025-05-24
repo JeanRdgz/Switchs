@@ -2,8 +2,21 @@
 session_start();
 require_once '../includes/config.php';
 
+// Obtener categorías seleccionadas del filtro
+$filtro_categorias = [];
+if (isset($_GET['categorias']) && is_array($_GET['categorias'])) {
+    $filtro_categorias = array_map('intval', $_GET['categorias']);
+}
+
+// Construir consulta SQL según filtro
 try {
-    $stmt = $pdo->query("SELECT * FROM Producto");
+    if (!empty($filtro_categorias)) {
+        $placeholders = implode(',', array_fill(0, count($filtro_categorias), '?'));
+        $stmt = $pdo->prepare("SELECT * FROM Producto WHERE id_categoria IN ($placeholders)");
+        $stmt->execute($filtro_categorias);
+    } else {
+        $stmt = $pdo->query("SELECT * FROM Producto");
+    }
     $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $productos = [];
@@ -42,6 +55,19 @@ try {
                 <div class="slide-overlay"></div>
             </div>
         </div>
+
+        <!-- Filtro de categorías -->
+        <form id="filtro-categorias-form" class="filtro-categorias-form" method="get">
+            <label style="font-weight:bold;">Filtrar por categoría:</label>
+            <label><input type="checkbox" name="categorias[]" value="1" <?php if(in_array(1, $filtro_categorias)) echo 'checked'; ?>> Keyboards</label>
+            <label><input type="checkbox" name="categorias[]" value="2" <?php if(in_array(2, $filtro_categorias)) echo 'checked'; ?>> DIY-kit</label>
+            <label><input type="checkbox" name="categorias[]" value="3" <?php if(in_array(3, $filtro_categorias)) echo 'checked'; ?>> Switch</label>
+            <label><input type="checkbox" name="categorias[]" value="4" <?php if(in_array(4, $filtro_categorias)) echo 'checked'; ?>> Keycap</label>
+            <button type="submit">Filtrar</button>
+            <?php if (!empty($filtro_categorias)): ?>
+                <a href="products.php">Quitar filtros</a>
+            <?php endif; ?>
+        </form>
 
         <section class="products-section">
             <div class="products-container">
