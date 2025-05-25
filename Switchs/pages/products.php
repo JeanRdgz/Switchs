@@ -56,7 +56,6 @@ try {
             </div>
         </div>
 
-        <!-- Filtro de categorías -->
         <form id="filtro-categorias-form" class="filtro-categorias-form" method="get">
             <label style="font-weight:bold;">Filtrar por categoría:</label>
             <label><input type="checkbox" name="categorias[]" value="1" <?php if(in_array(1, $filtro_categorias)) echo 'checked'; ?>> Keyboards</label>
@@ -108,6 +107,8 @@ try {
     <?php include '../components/footer.php'; ?>
     <script src="../assets/js/slider.js"></script>
     <script>
+        
+    //funcion para agregar al carrito
     function agregarAlCarrito(btn) {
         const form = btn.closest('form');
         const id_producto = form.querySelector('input[name="id_producto"]').value;

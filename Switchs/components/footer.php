@@ -11,9 +11,9 @@
         <div class="footer-box">
             <h2>Categorías</h2>
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Productos</a></li>
-                <li><a href="#">Personalizar</a></li>
+                <li><a href="index.php">Inicio</a></li>
+                <li><a href="products.php">Productos</a></li>
+                <li><a href="personalizar.php">Personalizar</a></li>
                 <li><a href="contact.php">Contacto</a></li>
             </ul>
         </div>

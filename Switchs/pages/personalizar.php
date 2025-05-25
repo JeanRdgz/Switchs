@@ -1,5 +1,17 @@
 <?php
 session_start();
+require_once '../includes/config.php';
+
+function obtenerProductosPorCategoria($categoriaId, $pdo)
+{
+    $stmt = $pdo->prepare("SELECT id_producto, nombre, imagen_url FROM Producto WHERE id_categoria = ?");
+    $stmt->execute([$categoriaId]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+$kits = obtenerProductosPorCategoria(2, $pdo);
+$switches = obtenerProductosPorCategoria(3, $pdo);
+$keycaps = obtenerProductosPorCategoria(4, $pdo);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -59,40 +71,50 @@ session_start();
             </div>
         </div>
 
-        <!-- Sección dinámica de personalización -->
         <section id="personalizar-dinamico-section">
             <div class="personalizar-dinamico-img">
-                <img id="personalizar-dinamico-img" src="../assets/images/DIYKit1.webp" alt="Vista teclado personalizado">
+                <img id="personalizar-dinamico-img" src="<?php echo !empty($kits) ? '../' . htmlspecialchars($kits[0]['imagen_url']) : '../assets/img/products/DIYKit1.webp'; ?>" alt="Vista teclado personalizado">
             </div>
             <div class="personalizar-dinamico-options">
                 <div class="personalizar-dinamico-group">
                     <label>DIY-kit:</label>
                     <div class="personalizar-dinamico-buttons" id="color-options">
-                        <button class="personalizar-dinamico-btn active" data-img="../assets/images/DIYKit1.webp">Dark Night</button>
-                        <button class="personalizar-dinamico-btn" data-img="../assets/images/DIYKit2.webp">Moonlight White</button>
-                        <button class="personalizar-dinamico-btn" data-img="../assets/images/DIYKit3.webp">Purple</button>
+                        <?php foreach ($kits as $i => $kit): ?>
+                            <button class="personalizar-dinamico-btn<?php echo $i === 0 ? ' active' : ''; ?>"
+                                data-img="<?php echo '../' . htmlspecialchars($kit['imagen_url']); ?>"
+                                data-id="<?php echo $kit['id_producto']; ?>">
+                                <?php echo htmlspecialchars($kit['nombre']); ?>
+                            </button>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 <div class="personalizar-dinamico-group">
                     <label>Switches:</label>
                     <div class="personalizar-dinamico-buttons" id="layout-options">
-                        <button class="personalizar-dinamico-btn active" data-img="../assets/images/switch8.webp">V3 Piano Pro - Clicky</button>
-                        <button class="personalizar-dinamico-btn" data-img="../assets/images/switch9.webp">Rosewood - Linear</button>
-                        <button class="personalizar-dinamico-btn" data-img="../assets/images/switch10.webp">Botany - Tactile</button>
+                        <?php foreach ($switches as $i => $switch): ?>
+                            <button class="personalizar-dinamico-btn<?php echo $i === 0 ? ' active' : ''; ?>"
+                                data-img="<?php echo '../' . htmlspecialchars($switch['imagen_url']); ?>"
+                                data-id="<?php echo $switch['id_producto']; ?>">
+                                <?php echo htmlspecialchars($switch['nombre']); ?>
+                            </button>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 <div class="personalizar-dinamico-group">
                     <label>Keycaps:</label>
                     <div class="personalizar-dinamico-buttons" id="keycap-options">
-                        <button class="personalizar-dinamico-btn active" data-img="../assets/images/keycap11.webp">Timeline Black</button>
-                        <button class="personalizar-dinamico-btn" data-img="../assets/images/keycap10.webp">Rainbow</button>
-                        <button class="personalizar-dinamico-btn" data-img="../assets/images/keycap9.webp">Retro 80</button>
+                        <?php foreach ($keycaps as $i => $keycap): ?>
+                            <button class="personalizar-dinamico-btn<?php echo $i === 0 ? ' active' : ''; ?>"
+                                data-img="<?php echo '../' . htmlspecialchars($keycap['imagen_url']); ?>"
+                                data-id="<?php echo $keycap['id_producto']; ?>">
+                                <?php echo htmlspecialchars($keycap['nombre']); ?>
+                            </button>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Botón agregar al carrito -->
         <div style="width:100%;display:flex;justify-content:center;margin:2.5rem 0;">
             <button id="add-to-cart-btn" class="personalizar-btn" style="min-width:220px;font-size:1.15rem;">
                 Agregar al carrito
@@ -131,15 +153,38 @@ session_start();
         setupPersonalizarOptions('layout-options');
         setupPersonalizarOptions('keycap-options');
 
-        // Agregar al carrito: requiere login
+        //Agregar al carrito la personalizacion
         document.getElementById('add-to-cart-btn').addEventListener('click', function() {
-            <?php if (empty($_SESSION['user_id'])): ?>
-                window.location.href = '/Switchs/Switchs/pages/login.php';
-            <?php else: ?>
-                alert('Producto agregado al carrito.');
-                // Aquí puedes agregar la lógica real de agregar al carrito
-            <?php endif; ?>
+
+            function getSelectedProductId(groupId) {
+                const group = document.getElementById(groupId);
+                const activeBtn = group.querySelector('.personalizar-dinamico-btn.active');
+                return activeBtn ? activeBtn.getAttribute('data-id') : null;
+            }
+            const kitId = getSelectedProductId('color-options');
+            const switchId = getSelectedProductId('layout-options');
+            const keycapId = getSelectedProductId('keycap-options');
+
+            fetch('../pages/agregar_carrito.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `id_kit=${encodeURIComponent(kitId)}&id_switch=${encodeURIComponent(switchId)}&id_keycap=${encodeURIComponent(keycapId)}`
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message || 'Productos agregados al carrito');
+                    } else if (data.message && data.message.includes('iniciar sesión')) {
+                        window.location.href = '/Switchs/Switchs/pages/login.php';
+                    } else {
+                        alert(data.message || 'Error al agregar al carrito');
+                    }
+                })
+                .catch(() => alert('Error de conexión con el servidor.'));
         });
     </script>
 </body>
+
 </html>

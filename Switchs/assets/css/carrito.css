@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+    --primary: #6a0dad;
+    --background: #000000;
+    --text: #ffffff;
+    --hover: #3a0a61;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.carrito-bg-slider {
+    width: 100vw;
+    min-height: 220px;
+    height: 32vh;
+    max-height: 400px;
+    background-image: linear-gradient(to bottom,rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5)), url('../images/slider4.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 100%;
+    background: #fff;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+}
+
+.carrito-table {
+    width: 100%;
+    max-width: 900px;
+    margin: 2rem auto;
+    background: var(--text);
+    border-radius: 12px;
+    color: black;
+}
+
+.carrito-table th,
+.carrito-table td {
+    padding: 12px 8px;
+    text-align: center;
+}
+
+.carrito-table th {
+    background: var(--primary);
+    color: var(--text);
+}
+
+.carrito-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.carrito-total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: right;
+    margin: 1.5rem 0 2rem 0;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.btn-eliminar {
+    background: var(--primary);
+    color: var(--text);
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-eliminar:hover {
+    background: var(--hover);
+}

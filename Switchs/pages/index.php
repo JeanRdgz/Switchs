@@ -43,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
             </div>
         </div>
 
-        <!-- sección "local stock" -->
         <section class="section-local-stock">
             <div class="local-stock-img">
                 <img src="../assets/images/slider5.webp" alt="Stock Local Switchs">
@@ -55,11 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
                     <li><b>2-3 días</b> de entrega rápida solo para clientes de España peninsular.</li>
                     <li><b>4-7 días</b> de envío para el resto de Europa.</li>
                 </ul>
-                <a href="#" class="discover-btn">Descubrir ahora</a>
+                <a href="products.php" class="discover-btn">Descubrir ahora</a>
             </div>
         </section>
 
-        <!-- sección "local stock" con imagen a la derecha -->
         <section class="section-local-stock-alt">
             <div class="local-stock-img">
                 <img src="../assets/images/imageIndex1.webp" alt="Stock Internacional Switchs">
@@ -73,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
             </div>
         </section>
 
-        <!--seccion de contacto-->
         <section class="section-contact">
             <div class="section-item">
                 <i class="fa-solid fa-truck-fast"></i>
@@ -97,7 +94,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
             </div>
         </section>
 
-        <!-- seccion "imagen parallax" -->
         <section class="section-image">
             <div class="section-image-item">
                 <div class="section-image-text">
@@ -107,7 +103,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
             </div>
         </section>
 
-        <!-- Newsletter Section con imagen -->
         <div class="newsletter-row">
             <section class="newsletter-section">
                 <img src="../assets/images/logo.png" alt="Logo" class="newsletter-logo">
@@ -134,7 +129,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
             </div>
         </div>
 
-        <!-- Carrusel Instagram -->
         <div class="instagram-carousel-container">
             <div class="instagram-carousel-title">
                 Síguenos en Instagram <b>@switchs.eu</b>

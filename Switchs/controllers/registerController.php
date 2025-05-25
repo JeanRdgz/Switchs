@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-// Incluir la configuración de la base de datos
 require_once '../includes/config.php'; 
 
 // Manejar el registro de usuario

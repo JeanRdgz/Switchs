@@ -191,7 +191,7 @@ body {
     background: #fff;
     border-radius: 14px;
     box-shadow: 0 2px 16px 0 rgba(31, 38, 135, 0.10);
-    padding: 2.5rem; /* Aumenta el padding para imagen más grande */
+    padding: 2.5rem;
 }
 
 .personalizar-dinamico-img img {

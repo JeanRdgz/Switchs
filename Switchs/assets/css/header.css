@@ -144,7 +144,6 @@ body {
     padding-right: 10px;
 }
 
-/* ---------- Responsive ---------- */
 @media (max-width: 768px) {
     .menu-toggle {
         display: inline;
